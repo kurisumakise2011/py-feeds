@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+  db:
+    image: mysql
+    restart: always
+    # Such password and username were taken just for simplicity
+    environment:
+      MYSQL_DATABASE: 'article_feed'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '610917'
+      MYSQL_ROOT_PASSWORD: '610917'
+    expose:
+      - '3306'
+    volumes:
+      - article-feed-db:/var/lib/mysql
+  front:
+    build: ../front/Dockerfile
+    ports:
+      - "4200:4200"
+volumes:
+  article-feed-db:

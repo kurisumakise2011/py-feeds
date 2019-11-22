@@ -1,0 +1,4 @@
+py_feeds.egg-info/*
+.idea/*
+build/*
+dist/*

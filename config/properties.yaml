@@ -1,0 +1,11 @@
+# Such password and username were taken just for simplicity
+db:
+  database: 'article_feed'
+  user: 'root'
+  password: '610917'
+  host: 'localhost'
+  port: '3306'
+whitelist: '\/users\/.*'
+secret: 'secret'
+clientID: '5ea9a5cd8777ed7145bf'
+client_secret: '3008eece812905b8b5a15b40fe6c08796894cae4'
