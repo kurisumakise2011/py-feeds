@@ -44,12 +44,13 @@ def init_app(config) -> web.Application:
         'user_service': UserService(repos['user_repository']),
         'hacker_news_searcher': searcher,
         'article_service': ArticleService(repos['article_repository'], searcher),
-        'token_service': TokenService(config['secret'])
+        'token_service': TokenService(config, repos['user_repository'])
     }
 
     controllers = {
         'auth_controller': AuthController(services['user_service'],
-                                          services['token_service']),
+                                          services['token_service'],
+                                          config['fe_redirect']),
         'article_controller': ArticleController(services['article_service']),
         'user_controller': UserController()
     }
@@ -61,11 +62,10 @@ def init_app(config) -> web.Application:
     # setup routes
     app.add_routes([web.post('/users/authenticate', controllers['auth_controller'].auth),
                     web.post('/users/register', controllers['auth_controller'].signin),
-                    web.post('/users/githubsso', controllers['auth_controller'].githubsso),
+                    web.get('/users/githubsso', controllers['auth_controller'].githubsso),
                     web.get('/articles', controllers['article_controller'].get_all),
                     web.post('/articles', controllers['article_controller'].find_article),
                     web.delete('/articles', controllers['article_controller'].remove_article_by_id)])
-
     # cors
     cors = aiohttp_cors.setup(app, defaults={
         '*': aiohttp_cors.ResourceOptions(

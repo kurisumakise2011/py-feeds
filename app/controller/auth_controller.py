@@ -1,5 +1,6 @@
 import json
 
+from aiohttp import web
 from aiohttp.web_response import Response
 
 from app.dto.credentials import Credentials
@@ -11,10 +12,12 @@ from app.service.user_service import UserService
 
 class AuthController(object):
     def __init__(self, user_service: UserService,
-                 token_service: TokenService) -> None:
+                 token_service: TokenService,
+                 fe_path: str) -> None:
         super().__init__()
         self.user_service = user_service
         self.token_service = token_service
+        self.fe_path = fe_path
 
     async def auth(self, request) -> Response:
         post = await request.json()
@@ -26,8 +29,7 @@ class AuthController(object):
                 'user_id': user.user_id,
                 'name': user.name,
                 'created_at': user.created_at,
-                'token': self.token_service.generate_jwt(user)}
-            ),
+                'token': self.token_service.generate_jwt(user)}),
                 status=200)
         else:
             raise AuthorizationException(message='Username or password is incorrect')
@@ -41,5 +43,10 @@ class AuthController(object):
                         status=201)
 
     async def githubsso(self, request) -> Response:
-        print(request)
-        return Response(text='')
+        code = request.rel_url.query['code']
+        if code:
+            user = await self.token_service.perform_github_authorization(code)
+            jwt = self.token_service.generate_jwt(user)
+            response = web.HTTPSeeOther(self.fe_path)
+            response.set_cookie('jwt', jwt, domain='localtunnel.me')
+            return response

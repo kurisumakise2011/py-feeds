@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://pyfeeds.localtunnel.me',
+  githubsso: 'https://github.com/login/oauth/authorize?client_id=5ea9a5cd8777ed7145bf',
 };
 
 /*

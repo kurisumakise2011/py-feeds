@@ -1,26 +1,38 @@
-<h2>Login</h2>
+<div class="row">
+  <div class="col-md-12 col-md-offset-6">
+    <h2 style="text-align: center;">Sign in</h2>
+  </div>
+</div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="username">Username</label>
-    <input id="username" type="text" formControlName="username" class="form-control"
+    <input id="username" placeholder="Username"
+           type="text" formControlName="username" class="form-control"
            [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
       <div *ngIf="f.username.errors.required">Username is required</div>
     </div>
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password" class="form-control"
+    <input id="password" placeholder="Password"
+           type="password" formControlName="password" class="form-control"
            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
       <div *ngIf="f.password.errors.required">Password is required</div>
     </div>
   </div>
   <div class="form-group">
-    <button [disabled]="loading" class="btn btn-primary">
+    <button [disabled]="loading" class="btn btn-primary form-control">
       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
       Login
     </button>
-    <a routerLink="/register" class="btn btn-link">Register</a>
+  </div>
+  <div class="form-group">
+    <a routerLink="/register" class="btn btn-success form-control">Register</a>
+  </div>
+    <div class="form-group">
+    <a href="{{githubsso}}"
+       type="button" class="btn btn-dark form-control">
+      Register via github
+    </a>
   </div>
 </form>

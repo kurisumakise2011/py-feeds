@@ -1,4 +1,9 @@
-<h3>Hi {{currentUser.name}}!</h3>
+<h3>Hi
+  <span *ngIf="currentUser.name; else username">
+  {{currentUser.name}}
+  </span>
+  <ng-template #username>{{currentUser.username}}</ng-template>
+  !</h3>
 <h4>Search feed news</h4>
 <div>
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
@@ -17,8 +22,7 @@
       </select>
     </div>
     <button class="btn btn-primary">
-      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-      Fetch
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Fetch
     </button>
   </form>
 </div>
@@ -30,16 +34,12 @@
   </mat-card-header>
   <!--<img mat-card-image src="" alt="">-->
   <mat-card-content>
-    <p *ngIf="article.content else article.comment_text">
-    </p>
-
+    <div *ngIf="article.content else article.comment_text"
+    class="col-sm-10">
+    </div>
   </mat-card-content>
   <mat-card-footer>
-    <p>
-      Created at {{article.created_at}}
-    </p>
-    <p>
-      Link at article <a href="{{article.url}}">{{article.url}}</a>
-    </p>
+    <p>Created at {{article.created_at}}</p>
+    <p>Link at article <a href="{{article.url}}">{{article.url}}</a></p>
   </mat-card-footer>
 </mat-card>

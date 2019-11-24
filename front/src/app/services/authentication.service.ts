@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {User} from '../models';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -25,12 +26,19 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          this.applyUser(user.token);
         }
 
         return user;
       }));
+  }
+
+  applyUser(jwt: string) {
+    const helper = new JwtHelperService();
+    let data = helper.decodeToken(jwt);
+    data.token = jwt;
+    localStorage.setItem('currentUser', JSON.stringify(data));
+    this.currentUserSubject.next(data);
   }
 
   logout() {

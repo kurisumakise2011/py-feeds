@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 import {AlertService, AuthenticationService} from '../services';
 
@@ -13,6 +14,7 @@ import {AlertService, AuthenticationService} from '../services';
 export class AuthComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
+  githubsso = environment.githubsso;
   submitted = false;
   returnUrl: string;
 
