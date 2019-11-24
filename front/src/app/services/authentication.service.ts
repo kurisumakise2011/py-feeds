@@ -5,13 +5,14 @@ import {map} from 'rxjs/operators';
 
 import {User} from '../models';
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookie: CookieService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -45,5 +46,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.cookie.delete('jwt', '/', 'localtunnel.me');
+    this.cookie.delete('jwt', '/', 'localhost');
   }
 }
