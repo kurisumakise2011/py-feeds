@@ -1,0 +1,15 @@
+# Such password and username were taken just for simplicity
+db:
+  database: 'article_feed'
+  user: 'root'
+  password: '610917'
+  host: 'mysql'
+  port: '3306'
+whitelist: '\/users\/.*'
+secret: 'secret'
+clientID: '5ea9a5cd8777ed7145bf'
+client_secret: '3008eece812905b8b5a15b40fe6c08796894cae4'
+githubsso: 'https://github.com/login/oauth/access_token'
+github_redirect: 'https://pyfeeds.localtunnel.me/users/githubsso'
+github_user_url: 'https://api.github.com/user'
+fe_redirect: 'https://fepyfeeds.localtunnel.me/'

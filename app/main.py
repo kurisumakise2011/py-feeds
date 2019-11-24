@@ -1,4 +1,5 @@
 import logging as log
+import time
 
 import aiohttp_cors
 from aiohttp import web
@@ -28,6 +29,7 @@ def init_app(config) -> web.Application:
         'host': config['db']['host'],
         'port': config['db']['port'],
     }
+    time.sleep(10)
     pool = Pool(db_config)
 
     # components
@@ -88,7 +90,7 @@ def init_app(config) -> web.Application:
 
 def main(config_path) -> None:
     config = load_config(config_path)
-    log.basicConfig(level=log.INFO, filename='../log/pyfeeds.log',
+    log.basicConfig(level=log.INFO, filename='log/pyfeeds.log',
                     filemode='w', format='%(asctime)s: %(name)s - %(levelname)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
     log.getLogger().addHandler(log.StreamHandler())

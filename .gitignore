@@ -3,4 +3,4 @@ py_feeds.egg-info/*
 build/*
 dist/*
 **/__pycache__/*
-log/*
+app/log/*

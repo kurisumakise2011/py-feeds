@@ -1,10 +1,13 @@
-version: '3'
+version: '3.7'
 services:
   web:
     build: .
+    expose:
+      - "8080"
     ports:
       - "8080:8080"
-  db:
+  mysql:
+    command: mysqld --default-authentication-plugin=mysql_native_password
     image: mysql
     restart: always
     # Such password and username were taken just for simplicity
@@ -13,12 +16,13 @@ services:
       MYSQL_USER: 'root'
       MYSQL_PASSWORD: '610917'
       MYSQL_ROOT_PASSWORD: '610917'
-    expose:
-      - '3306'
+    ports:
+      - "3306:3306"
     volumes:
+      - ./sql/ddl_script.sql:/docker-entrypoint-initdb.d/init.sql
       - article-feed-db:/var/lib/mysql
   front:
-    build: ../front/Dockerfile
+    build: front/.
     ports:
       - "4200:4200"
 volumes:

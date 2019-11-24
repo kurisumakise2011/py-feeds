@@ -1,24 +1,20 @@
-from setuptools import setup
-
-dependencies = [
-    'aiohttp>=3.0.0',
-    'cchardet',
-    'aiodns',
-    'pyjwt',
-    'bcrypt',
-    'aiohttp_jwt',
-    'yaml',
-    'aiohttp-cors',
-    'aiohttp_security',
-    'mysql'
-]
+from setuptools import find_packages, setup
 
 setup(
     name='py-feeds',
     version='1.0',
+    platforms=['POSIX'],
+    packages=find_packages(),
     description='App for monitoring news feed by some keywords',
     author='Vladyslav Nahaiev',
     author_email='vlad.nagaev.vn@gmail.com',
-    packages=['app'],
-    install_requires=dependencies
+    install_requires=['aiohttp',
+                      'aiohttp_jwt',
+                      'aiohttp_cors',
+                      'aiohttp_security',
+                      'py-bcrypt',
+                      'mysql-connector-python',
+                      'pyyaml',
+                      'mysqlclient==1.3.12',
+                      'PyJWT']
 )
