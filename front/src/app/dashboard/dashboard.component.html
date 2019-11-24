@@ -16,9 +16,10 @@
       </div>
     </div>
     <div class="form-group">
+      Choose searching by (index in all, title in only titles)
       <select id="type" formControlName="type" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
-        <option selected="selected" value="index">Index</option>
+        <option value="index">Index</option>
         <option value="title">Title</option>
       </select>
     </div>
