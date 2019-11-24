@@ -63,6 +63,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.loading = false;
           if (data) {
             this.alertService.success("Articles have been found " + data.length, true)
+            this.articles = data
           }
         },
         error => {
