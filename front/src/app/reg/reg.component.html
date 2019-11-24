@@ -26,10 +26,12 @@
     </div>
   </div>
   <div class="form-group">
-    <button [disabled]="loading" class="btn btn-primary">
+    <button [disabled]="loading" class="btn btn-primary form-control">
       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
       Register
     </button>
-    <a routerLink="/login" class="btn btn-link">Cancel</a>
+  </div>
+  <div class="form-group">
+    <a routerLink="/login" class="btn btn-secondary form-control">Cancel</a>
   </div>
 </form>
