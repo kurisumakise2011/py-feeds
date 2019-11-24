@@ -1,4 +1,5 @@
 import bcrypt
+import logging as log
 
 
 def generate_password_hash(password):
@@ -13,5 +14,6 @@ def check_password_hash(plain_password, password_hash):
     try:
         is_correct = bcrypt.checkpw(plain_password_bin, password_hash_bin)
         return is_correct
-    except ValueError:
+    except ValueError as e:
+        log.error('Value error occurred while checking password', e)
         return False

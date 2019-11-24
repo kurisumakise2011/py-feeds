@@ -14,7 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     try {
       return next.handle(request).pipe(catchError(err => {
         let e = err.error.error || err.error || 'Service is unavailable';
-        if (e && e instanceof String) {
+        if (e && typeof e == 'string') {
           return throwError(e);
         } else {
           return throwError('Service is unavailable')
