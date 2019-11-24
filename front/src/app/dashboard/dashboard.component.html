@@ -32,7 +32,7 @@
   </form>
 </div>
 <div style="margin: 50px;"></div>
-<div id="articles" *ngFor="let article of articles">
+<div id="articles" *ngFor="let article of articles;">
   <mat-card class="article-card" style="background: white;">
     <mat-card-header>
       <mat-card-title><b>{{article.title}}</b></mat-card-title>
@@ -63,4 +63,12 @@
   </mat-card>
   <div style="margin: 30px;"></div>
 </div>
-
+<div style="margin: 50px;"></div>
+<div *ngIf="articles.length != 0">
+  <button
+    [disabled]="disabled"
+    (click)="loadMoreArticles()" class="btn btn-primary form-control">
+    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+    More articles
+  </button>
+</div>

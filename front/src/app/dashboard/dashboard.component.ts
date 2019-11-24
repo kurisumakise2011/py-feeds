@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   articles: Article[] = [];
   submitted = false;
   loading = false;
+  offset = 0;
+  disabled = false;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -63,7 +65,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.loading = false;
           if (data) {
             this.alertService.success("Articles have been found " + data.length, true)
-            this.articles = data
+            this.articles = data;
+            this.disabled = false;
           }
         },
         error => {
@@ -77,8 +80,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.currentUserSubscription.unsubscribe();
   }
 
+  loadMoreArticles() {
+    this.offset += 5;
+    this.articleService.getAll(5, this.offset).pipe(first()).subscribe(articles => {
+      if (articles.length == 0) {
+        this.disabled = true;
+      } else {
+        this.disabled = false;
+        this.articles = this.articles.concat(articles);
+      }
+    })
+  }
+
   private loadAllArticles() {
-    this.articleService.getAll().pipe(first()).subscribe(articles => {
+    this.articleService.getAll(5, this.offset).pipe(first()).subscribe(articles => {
       this.articles = articles;
     });
   }
