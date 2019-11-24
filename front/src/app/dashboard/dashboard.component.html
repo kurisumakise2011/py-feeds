@@ -3,7 +3,8 @@
   {{currentUser.name}}
   </span>
   <ng-template #username>{{currentUser.username}}</ng-template>
-  !</h3>
+  !
+</h3>
 <h4>Search feed news</h4>
 <div>
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
@@ -26,20 +27,36 @@
     </button>
   </form>
 </div>
-<mat-card class="article-card" *ngFor="let article of articles">
-  <mat-card-header>
-    <!--<mat-card-avatar></mat-card-avatar>-->
-    <mat-card-title>{{article.title}}</mat-card-title>
-    <mat-card-subtitle>{{article.author}}</mat-card-subtitle>
-  </mat-card-header>
-  <!--<img mat-card-image src="" alt="">-->
-  <mat-card-content>
-    <div *ngIf="article.content else article.comment_text"
-    class="col-sm-10">
-    </div>
-  </mat-card-content>
-  <mat-card-footer>
-    <p>Created at {{article.created_at}}</p>
-    <p>Link at article <a href="{{article.url}}">{{article.url}}</a></p>
-  </mat-card-footer>
-</mat-card>
+<div style="margin: 50px;"></div>
+<div id="articles" *ngFor="let article of articles">
+  <mat-card class="article-card" style="background: white;">
+    <mat-card-header>
+      <mat-card-title><b>{{article.title}}</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="article.content; else show">
+        {{article.content}}
+      </div>
+      <ng-template #show>There is no any content
+        <p>Please visit link <a href="{{article.url}}">{{article.url}}</a></p>
+      </ng-template>
+      <div *ngIf="article.comment_text; else show_comments">
+        {{article.content}}
+      </div>
+      <ng-template #show_comments>There is no any commentaries
+        <p>Please visit link <a href="{{article.url}}">{{article.url}}</a></p>
+      </ng-template>
+      <div>
+        <i>Author: {{article.author}}</i>
+      </div>
+      <div>
+        <i>Date: {{article.created_at}}</i>
+      </div>
+      <div>
+        <i>Date of found: {{article.fetched_at}}</i>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div style="margin: 30px;"></div>
+</div>
+
