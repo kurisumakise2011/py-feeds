@@ -1,4 +1,4 @@
-FROM python:3.6.5
+FROM python:3.6.7
 WORKDIR /code
 
 RUN apt-get update
@@ -16,4 +16,5 @@ RUN pip install .
 
 RUN npm install -g localtunnel
 
-CMD lt --port 8080 --subdomain pyfeeds && python app/main.py -c properties.yaml
+RUN nohup lt --port 8080 --subdomain pyfeeds > /dev/null &
+ENTRYPOINT python app/main.py -c properties.yaml

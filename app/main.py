@@ -1,5 +1,4 @@
 import logging as log
-import time
 
 import aiohttp_cors
 from aiohttp import web
@@ -29,7 +28,6 @@ def init_app(config) -> web.Application:
         'host': config['db']['host'],
         'port': config['db']['port'],
     }
-    time.sleep(10)
     pool = Pool(db_config)
 
     # components

@@ -1,5 +1,5 @@
 def to_str(s):
-    return '' if s is None else s.decode()
+    return '' if s is None else str(s)
 
 
 def time_to_str(t):
