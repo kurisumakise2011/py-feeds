@@ -17,5 +17,5 @@ RUN pip install .
 
 RUN npm install -g localtunnel
 
-RUN nohup lt --port 8080 --subdomain pyfeeds > /dev/null &
+CMD lt --port 8080 --subdomain pyfeeds
 ENTRYPOINT python app/main.py -c properties.yaml

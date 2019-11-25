@@ -24,9 +24,18 @@ Functionality:
  
 How to run application:
   
+  Locally
   fe url: http://localhost:4200
+  
+  Docker
+  fe url: http://192.168.99.100:4200 (by default if docker ip, your might be different please check, docker info)
  
+  Locally
   be url: http://localhost:8080
+  be url: https://pyfeed.localtunnel.me
+  
+  Docker
+  be url: http://192.168.99.100:8080
   be url: https://pyfeed.localtunnel.me
 
    1) Docker-compose

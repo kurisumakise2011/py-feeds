@@ -5,4 +5,4 @@ COPY package.json /app/package.json
 RUN npm install
 RUN npm install -g localtunnel
 COPY . /app
-ENTRYPOINT ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check
+ENTRYPOINT ng serve --open --host 0.0.0.0 --port 4200 --prod

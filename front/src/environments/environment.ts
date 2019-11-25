@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://127.0.0.1:8080',
   githubsso: 'https://github.com/login/oauth/authorize?client_id=5ea9a5cd8777ed7145bf',
 };
 
