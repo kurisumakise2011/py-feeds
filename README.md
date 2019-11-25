@@ -21,20 +21,21 @@ Functionality:
  
 How to run application:
   
-  fe url: https://fepyfeeds.localtunnel.me
+  fe url: http://localhost:4200
  
-  be url: https://pyfeeds.localtunnel.me
+  be url: http://localhost:8080
+  be url: https://pyfeed.localtunnel.me
 
    1) Docker-compose
       
       Download application and you should have docker more about https://docs.docker.com/docker-for-windows/install/
    
-      ```docker-compose up```
+      ```docker-compose up --build```
       
       Do only once (if's not started automatically)
       ```connect to 192.168.99.100:3306 -u root -p root and run sql/ddl_script.sql```
       
-      P.s. Sometimes you can encounter with some connection problem, please make sure that tunnels are working
+      P.s. Sometimes you can encounter with some connection problem, please make sure that tunnel is working
    
    2) Locally
       
@@ -43,10 +44,10 @@ How to run application:
       downloads local tunnel
       ```npm install -g localtunnel```
       
-      run for back-end ```lt --port 8080 --subdomain pyfeeds```
-      run for front-end ```lt --port 4200 --subdomain fepyfeeds```
+      it's needed for getting callback from github api
+      run for back-end ```lt --port 8080 --subdomain pyfeed```
       
-      run front-end ```server ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check```
+      run front-end ```server ng serve --open --host 0.0.0.0 --port 4200```
       run backed-end server ```python app/main.py -c config/properties.yaml```
       
       in case of issue ```ModuleNotFoundError: No module named 'app'```
