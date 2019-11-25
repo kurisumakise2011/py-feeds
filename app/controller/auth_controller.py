@@ -48,5 +48,5 @@ class AuthController(object):
             user = await self.token_service.perform_github_authorization(code)
             jwt = self.token_service.generate_jwt(user)
             response = web.HTTPSeeOther(self.fe_path)
-            response.set_cookie('jwt', jwt, domain='localtunnel.me')
+            response.set_cookie('jwt', jwt)
             return response

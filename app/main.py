@@ -29,7 +29,7 @@ def init_app(config) -> web.Application:
         'host': config['db']['host'],
         'port': config['db']['port'],
     }
-    time.sleep(5)
+    time.sleep(10)
     pool = Pool(db_config)
 
     # components
@@ -99,6 +99,7 @@ def main(config_path) -> None:
 
 if __name__ == '__main__':
     import argparse
+    print('running')
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', help='Provide path to config file')

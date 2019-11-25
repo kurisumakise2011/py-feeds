@@ -12,9 +12,8 @@ setup(
                       'aiohttp_jwt',
                       'aiohttp_cors',
                       'aiohttp_security',
-                      'py-bcrypt',
+                      'bcrypt',
                       'mysql-connector-python',
                       'pyyaml',
-                      'mysqlclient==1.3.12',
                       'PyJWT']
 )
