@@ -1,5 +1,8 @@
 # py-feeds
 
+
+Please contact me in case of any issues with starting/using
+
 How to run web app:
 
 This project has two applications: 
